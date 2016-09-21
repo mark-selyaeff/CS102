@@ -1,5 +1,7 @@
 def encrypt_vigenere(plaintext, keyword):
-	ciphertext = ''
+	ciphertext = '' # Обнуляем строку
+	
+	# Подгонка ключа под размер входного слова
 	if len(plaintext) > len(keyword):
 		modulo = len(plaintext) % len(keyword)
 		keyword = keyword * int((len(plaintext) / len(keyword)))
@@ -7,8 +9,13 @@ def encrypt_vigenere(plaintext, keyword):
 			keyword = keyword + keyword[:modulo]
 	else:
 		keyword = keyword[:len(plaintext)]
+
+	# Получаем зашифрованное слово	
 	for i in range(len(plaintext)):
-		ciphertext += chr(ord(plaintext[i]) + ord(keyword[i]) - 65)
+		if (ord(plaintext[i].upper()) + ord(keyword[i].upper()) - 65) <= 90:
+			ciphertext += chr(ord(plaintext[i].upper()) + (ord(keyword[i].upper()) - 65))
+		else:
+			ciphertext +=  chr(ord(keyword[i].upper()) - 91 + ord(plaintext[i].upper()))
 	return ciphertext
 
 plaintext = input('Enter a plaintext: ')
