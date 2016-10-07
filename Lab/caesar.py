@@ -1,6 +1,5 @@
 # Шифровка
 def encrypt_caesar(plaintext):
-    plaintext = str(plaintext)
     ciphertext = ""
     for i in range(len(plaintext)):
         if (88 <= ord(plaintext[i]) <= 90) or (120 <= ord(plaintext[i]) <= 122):
@@ -12,7 +11,6 @@ def encrypt_caesar(plaintext):
 
 # Расшифровка
 def decrypt_caesar(ciphertext):
-    ciphertext = str(ciphertext)
     plaintext = ""
     for i in range(len(ciphertext)):
         if (65 <= ord(ciphertext[i]) <= 67) or (97 <= ord(ciphertext[i]) <= 99):
