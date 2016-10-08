@@ -1,7 +1,7 @@
 def length_equal(s, keyword):  # Уравнивание длины строк
     if len(s) > len(keyword):
         modulo = len(s) % len(keyword)
-        keyword = keyword * int((len(s) / len(keyword)))
+        keyword = keyword * (len(s) // len(keyword))
         if modulo:
             keyword = keyword + keyword[:modulo]
     else:
@@ -33,4 +33,4 @@ def decrypt_vigenere(ciphertext, keyword):
 
 a = input('Enter a plaintext: ')
 keyword = input('Enter a key: ')
-print(decrypt_vigenere(a, keyword))
+print(encrypt_vigenere(a, keyword))
