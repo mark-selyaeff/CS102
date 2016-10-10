@@ -2,18 +2,34 @@ import math
 
 
 def is_prime(n):
+    """
+    >>> is_prime(2)
+    True
+    >>> is_prime(11)
+    True
+    >>> is_prime(8)
+    False
+    """
     n = int(n)
     is_prime = True
-    if n % 2 != 0 and n > 2:
+    if n == 2:
+        return True
+    if n % 2 != 0 and n >= 2:
         for i in range(3, int(math.sqrt(n))+1, 2):
             if n % i == 0 and is_prime:
-                is_prime = False
+                return False
     elif n <= 1 or n % 2 == 0:
-        is_prime = False
+        return False
     return is_prime
 
 
 def gcd(a, b):
+    """
+    >>> gcd(12, 15)
+    3
+    >>> gcd(3, 7)
+    1
+    """
     a = int(a)
     b = int(b)
     return gcd(b, a % b) if b else a
@@ -82,3 +98,7 @@ if __name__ == '__main__':
     print("Decrypting message with public key ", public, " . . .")
     print("Your message is:")
     print(decrypt(public, encrypted_msg))
+
+
+
+

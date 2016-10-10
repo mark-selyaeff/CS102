@@ -10,6 +10,14 @@ def length_equal(s, keyword):  # Уравнивание длины строк
 
 
 def encrypt_vigenere(plaintext, keyword):
+    """
+    >>> encrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> encrypt_vigenere("python", "a")
+    'PYTHON'
+    >>> encrypt_vigenere("ATTACKATDAWN", "LEMON")
+    'LXFOPVEFRNHR'
+    """
     ciphertext = ''  # Обнуляем строку
     keyword = length_equal(plaintext, keyword)
     for i in range(len(plaintext)):
@@ -21,6 +29,14 @@ def encrypt_vigenere(plaintext, keyword):
 
 
 def decrypt_vigenere(ciphertext, keyword):
+    """
+    >>> decrypt_vigenere("PYTHON", "A")
+    'PYTHON'
+    >>> decrypt_vigenere("python", "a")
+    'PYTHON'
+    >>> decrypt_vigenere("LXFOPVEFRNHR", "LEMON")
+    'ATTACKATDAWN'
+    """
     plaintext = ''
     keyword = length_equal(ciphertext, keyword)
     for i in range(len(ciphertext)):
