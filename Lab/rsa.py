@@ -12,8 +12,6 @@ def is_prime(n):
         is_prime = False
     return is_prime
 
-def is_prime_1(val):
-    return [x for x in range(2,val+1) if all((x%y for y in range(2,1+int(x**0.5))))]
 
 def gcd(a, b):
     a = int(a)
@@ -68,7 +66,6 @@ def decrypt(pk, ciphertext):
     plain = [chr((char ** key) % n) for char in ciphertext]
     # Return the array of bytes as a string
     return ''.join(plain)
-
 
 
 if __name__ == '__main__':

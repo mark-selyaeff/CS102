@@ -2,7 +2,7 @@
 def encrypt_caesar(plaintext):
     ciphertext = ""
     for i in range(len(plaintext)):
-        if (88 <= ord(plaintext[i]) <= 90) or (120 <= ord(plaintext[i]) <= 122):
+        if ((88 <= ord(plaintext[i]) <= 90) or (120 <= ord(plaintext[i]) <= 122)):
             ciphertext += chr(ord(plaintext[i]) - 23)
         else:
             ciphertext += chr(ord(plaintext[i]) + 3)
