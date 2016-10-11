@@ -88,3 +88,21 @@ def get_block(values, pos):
         elif pos[1] in third:
             return [[values[i][j] for j in third] for i in third]
 
+
+def find_empty_positions(grid):
+    """ Найти первую свободную позицию в пазле
+
+    >>> find_empty_positions([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']])
+    (0, 2)
+    >>> find_empty_positions([['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']])
+    (1, 1)
+    >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
+    (2, 0)
+    """
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            if grid[i][j] == '.':
+                return (i, j)
+    return False
+
+
