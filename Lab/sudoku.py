@@ -48,7 +48,7 @@ def get_col(values, pos):
 
     >>> get_col([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']], (0, 0))
     ['1', '4', '7']
-    >>> get_col([['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']], (0, 1))
+    >>> get_col([['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']], (0, 1))   ВОТ ТУТ ОШИБКА В ДОКТЕСТАХ
     ['2', '5', '8']
     >>> get_col([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']], (0, 2))
     ['3', '6', '9']
@@ -57,4 +57,34 @@ def get_col(values, pos):
     for row in values:
         a.append(row[pos[1]])
     return a
+
+
+
+def get_block(values, pos):
+    #
+    a = []
+    first = (0, 1, 2)
+    second = (3, 4, 5)
+    third = (6, 7, 8)
+    if pos[0] in first:
+        if pos[1] in first:
+            return [[values[i][j] for j in first] for i in first]
+        elif pos[1] in second:
+            return [[values[i][j] for j in second] for i in first]
+        elif pos[1] in third:
+            return [[values[i][j] for j in third] for i in first]
+    elif pos[0] in second:
+        if pos[1] in first:
+            return [[values[i][j] for j in first] for i in second]
+        elif pos[1] in second:
+            return [[values[i][j] for j in second] for i in second]
+        elif pos[1] in third:
+            return [[values[i][j] for j in third] for i in second]
+    elif pos[0] in third:
+        if pos[1] in first:
+            return [[values[i][j] for j in first] for i in third]
+        elif pos[1] in second:
+            return [[values[i][j] for j in second] for i in third]
+        elif pos[1] in third:
+            return [[values[i][j] for j in third] for i in third]
 
