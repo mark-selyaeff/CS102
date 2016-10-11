@@ -21,4 +21,13 @@ def group(values, n):
         a.append(b[i:i + n])
     return a
 
-print(group([1,2,3,4,5,6,7,8,9], 3))
+def display(values):
+    """Вывод Судоку """
+    width = 2
+    line = '+'.join(['-' * (width * 3)] * 3)
+    for row in range(9):
+        print(''.join(values[row][col].center(width) + ('|' if str(col) in '25' else '') for col in range(9)))
+        if str(row) in '25':
+            print(line)
+    print()
+
