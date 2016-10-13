@@ -105,4 +105,20 @@ def find_empty_positions(grid):
                 return (i, j)
     return False
 
+def find_possible_values(grid, pos):
+    """ Вернуть все возможные значения для указанной позиции """
+    p_values = [] # Возможные значения
+    row = get_row(grid, pos)
+    col = get_col(grid, pos)
+    block = list_transform(get_block(grid, pos))
+    for i in ('123456789'):
+        if (i not in row) and (i not in col) and (i not in block):
+            p_values.append(i)
+    return p_values
 
+def list_transform(a):
+    transformed = []
+    for row in a:
+        for elem in row:
+            transformed.append(elem)
+    return transformed
