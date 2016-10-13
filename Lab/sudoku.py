@@ -89,14 +89,14 @@ def get_block(values, pos):
             return [[values[i][j] for j in third] for i in third]
 
 
-def find_empty_positions(grid):
+def find_empty_position(grid):
     """ Найти первую свободную позицию в пазле
 
-    >>> find_empty_positions([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']])
+    >>> find_empty_position([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']])
     (0, 2)
-    >>> find_empty_positions([['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']])
+    >>> find_empty_position([['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']])
     (1, 1)
-    >>> find_empty_positions([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
+    >>> find_empty_position([['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']])
     (2, 0)
     """
     for i in range(len(grid)):
@@ -122,3 +122,17 @@ def list_transform(a):
         for elem in row:
             transformed.append(elem)
     return transformed
+
+def solve(grid):
+    if find_empty_position(grid) == False:
+        return grid
+    else:
+        empty_pos = find_empty_position(grid)
+        if find_possible_values(grid, empty_pos):
+            for possible_value in find_possible_values(grid, empty_pos):
+                grid[empty_pos[0]][empty_pos[1]] = possible_value
+                print('loop') # для отладки
+                solve(grid)
+        else:
+            return ('No possible values found')
+
