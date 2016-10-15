@@ -125,14 +125,14 @@ def list_transform(a):
 
 def solve(grid):
     if find_empty_position(grid) == False:
-        return grid
+        return False
     else:
         empty_pos = find_empty_position(grid)
         if find_possible_values(grid, empty_pos):
             for possible_value in find_possible_values(grid, empty_pos):
                 grid[empty_pos[0]][empty_pos[1]] = possible_value
-                print('loop') # для отладки
+                print('On position {},{}: {}'.format(empty_pos[0], empty_pos[1], possible_value)) # для отладки
                 solve(grid)
         else:
-            return ('No possible values found')
+            return 'No values found'
 
