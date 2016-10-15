@@ -125,14 +125,23 @@ def list_transform(a):
 
 def solve(grid):
     if find_empty_position(grid) == False:
-        return False
-    else:
-        empty_pos = find_empty_position(grid)
-        if find_possible_values(grid, empty_pos):
-            for possible_value in find_possible_values(grid, empty_pos):
-                grid[empty_pos[0]][empty_pos[1]] = possible_value
-                print('On position {},{}: {}'.format(empty_pos[0], empty_pos[1], possible_value)) # для отладки
-                solve(grid)
-        else:
-            return 'No values found'
+        return True
+    empty_pos = find_empty_position(grid)
+    if find_possible_values(grid, empty_pos):
+        for possible_value in find_possible_values(grid, empty_pos):
+            grid[empty_pos[0]][empty_pos[1]] = possible_valuech
+            print('On position {},{}: {}'.format(empty_pos[0], empty_pos[1], possible_value)) # для отладки
+            if solve(grid):
+                return True
+            grid[empty_pos[0]][empty_pos[1]] = '.'
+    return False # Возвращается, если есть свободные позиции и нет подходящих значений
 
+def check_solution(grid):
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            in_col = get_col(grid, (i, j)).count(grid[i][j])
+            in_row = get_row(grid, (i, j)).count(grid[i][j])
+            in_block = list_transform(get_block(grid, (i, j))).count(grid[i][j])
+            if (in_col + in_row + in_block) > 3:
+                return False
+    return True
