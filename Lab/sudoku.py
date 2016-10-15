@@ -129,7 +129,7 @@ def solve(grid):
     empty_pos = find_empty_position(grid)
     if find_possible_values(grid, empty_pos):
         for possible_value in find_possible_values(grid, empty_pos):
-            grid[empty_pos[0]][empty_pos[1]] = possible_valuech
+            grid[empty_pos[0]][empty_pos[1]] = possible_value
             print('On position {},{}: {}'.format(empty_pos[0], empty_pos[1], possible_value)) # для отладки
             if solve(grid):
                 return True
