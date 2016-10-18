@@ -1,4 +1,7 @@
   # coding=UTF-8
+import random
+
+
 def read_sudoku(filename):
     """ Прочитать судоку из указанного файла """
     digits = [c for c in open(filename).read() if c in '123456789.']
@@ -145,3 +148,20 @@ def check_solution(grid):
             if (in_col + in_row + in_block) > 3:
                 return False
     return True
+
+def transpose(grid):
+    return [[grid[j][i] for j in range(len(grid))] for i in range(len(grid))]
+
+def generate_sudoku():
+    area = (0, 1, 2)
+    grid = read_sudoku('base_puzzle.txt')
+    for i in range(random.randint(200, 1200)):
+        rand_key1 = random.choice(area)
+        rand_key2 = random.choice(area)
+        grid[rand_key1], grid[rand_key2] = grid[rand_key2], grid[rand_key1]
+        grid = transpose(grid)
+    for i in range(9):
+        for j in range(9):
+            if random.randint(1, 81) > 25:
+                grid[i][j] = '.'
+    return grid
