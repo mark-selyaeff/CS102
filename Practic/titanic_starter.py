@@ -54,7 +54,8 @@ pp(titanic_data[-2:])
 def survived(tit_data):
     # Функция возвращает кортеж из двух элементов: количество
     # выживших и число погибших
-    pass
+    count = sum([int(record['survived']) for record in tit_data])
+    return (count, len(tit_data) - count)
 
 pp(survived(titanic_data)) # (500, 809)
 
@@ -68,7 +69,9 @@ def survived_by_sex(tit_data):
     # (пол, (количество выживших, число погибших))
 
     # Подумайте над использованием функции survived()
-    pass
+    males = [record for record in tit_data if record['sex'] == 'male']
+    females = [record for record in tit_data if record['sex'] == 'female']
+    return [('males', survived(males)), ('females', survived(females))]
 
 pp(survived_by_sex(titanic_data)) # [('female', (339, 127)), ('male', (161, 682))]
 
