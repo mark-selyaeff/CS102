@@ -14,7 +14,7 @@ def to_str(lines):
     # записи в файл каждая запись начиналась с новой строки
 
     # Удалите pass и представьте ваше решение
-    pass
+    return [str(line, 'utf-8') + '\n' for line in lines]
 
 
 def download_file(url):
@@ -79,7 +79,8 @@ pp(survived_by_sex(titanic_data)) # [('female', (339, 127)), ('male', (161, 682)
 #### Задание 5: Узнать средний возраст пассажиров
 def average_age(tit_data):
     # Функция возвращает средний возраст пассажиров
-    pass
+    a = [float(record['age']) for record in tit_data if record['age'] != 'NA']
+    return round(sum(a) / len(a), 2)
 
 pp(average_age(titanic_data)) # 29.88
 
@@ -90,7 +91,9 @@ def average_age_by_sex(tit_data):
     # (пол, средний возраст)
 
     # Подумайте над использованием функции average_age()
-    pass
+    males = [record for record in tit_data if record['sex'] == 'male']
+    females = [record for record in tit_data if record['sex'] == 'female']
+    return [('male', average_age(males)), ('female', average_age(females))]
 
 pp(average_age_by_sex(titanic_data)) # [('female', 28.68), ('male', 30.58)]
 
@@ -98,8 +101,39 @@ pp(average_age_by_sex(titanic_data)) # [('female', 28.68), ('male', 30.58)]
 #### Задание 7: Сколько детей и взрослых было на борту:
 #### Получить группы в следующих диапазонах возрастов:
 #### [0-14), [14-18), [18-inf]
+def group_by_age(tit_data):
+    teens = []
+    uniors = []
+    adults = []
+    for x in tit_data:
+        try:
+            float(x['age'])
+        except ValueError:
+            pass
+        else:
+            if 0 <= float(x['age']) < 14:
+                teens.append(x)
+            elif 14 <= float(x['age']) < 18:
+                uniors.append(x)
+            elif float(x['age']) >= 18:
+                adults.append(x)
+    return teens, uniors, adults
 
 #### Задание 8: Сколько в каждой группе выживших
+def count_age(tit_data):
+    return [survived(x)[0] for x in group_by_age(tit_data)]
 
+pp(count_age(titanic_data))
 #### Задание 9: Сколько в каждой группе выживших по отдельности для
 #### мужчин и женщин
+def count_age_sex(tit_data):
+    males = []
+    females = []
+    for x in tit_data:
+        if x['sex'] == 'male':
+            males.append(x)
+        elif x['sex'] == 'female':
+            females.append(x)
+    return 'males: {}, females: {}'.format(count_age(males), count_age(females))
+
+pp(count_age_sex(titanic_data))
