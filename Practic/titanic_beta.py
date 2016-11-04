@@ -2,7 +2,7 @@
 def survived(tit_data):
 	count = 0
 	for record in tit_data:
-		count += int(record['surveved'])
+		count += int(record['survived'])
 	return (count, len(tit_data) - count)
 
 # с генератором
