@@ -4,7 +4,7 @@ import random
 
 
 class GameOfLife:
-    def __init__(self, width = 640, height = 480, cell_size = 10, speed = 10):
+    def __init__(self, width = 640, height = 480, cell_size = 10, speed = 100):
         self.width = width
         self.height = height
         self.cell_size = cell_size
@@ -68,36 +68,39 @@ class GameOfLife:
                 color = green if rects[i][j] else white
                 pygame.draw.rect(self.screen, color, (x, y, width, width))
 
-    def get_neighbours(self, x, y): # x, y – координаты
+    def get_neighbours(self, clist, x, y): # x, y – координаты
         area = (-1, 0, 1)
         neighbours = []
         for i in area:
             for j in area:
                 if (i | j) and (x+i >= 0) and (y+j >= 0):
                     try:
-                        neighbours.append(self.clist[x+i][y+j])
+                        neighbours.append(clist[x+i][y+j])
                     except IndexError:
                         pass
         return neighbours
 
     def update_cell_list(self, cell_list):
-        new_cell_list = [[0] * self.cell_width] * self.cell_height
-        for i in range(len(cell_list)):
-            for j in range(len(cell_list[i])):
-                if cell_list[i][j] == 1:
-                    if sum(self.get_neighbours(i, j)) not in (2, 3):
+        new_cell_list = cell_list
+        for i in range(self.cell_height):
+            for j in range(self.cell_width):
+                if cell_list[i][j]:
+                    if sum(self.get_neighbours(self.clist, i, j)) not in (2, 3):
                         new_cell_list[i][j] = 0
                     else:
                         new_cell_list[i][j] = 1
-                elif cell_list[i][j] == 0:
-                    if sum(self.get_neighbours(i, j)) == 3:
+                else:
+                    if sum(self.get_neighbours(self.clist, i, j)) == 3:
                         new_cell_list[i][j] = 1
+                    else:
+                        new_cell_list[i][j] = 0
+
         self.clist = new_cell_list
 
 
 
 
 if __name__ == '__main__':
-    game = GameOfLife(320, 240, 20)
-    game.run()
+    game1 = GameOfLife(640, 480, 20)
+    game1.run()
 
